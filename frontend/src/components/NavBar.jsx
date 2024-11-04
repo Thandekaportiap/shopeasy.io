@@ -39,7 +39,7 @@ const Navbar = ({ id, onLogout, role }) => {
                         <NavLink to="/" className={({ isActive }) => (isActive ? 'text-[#eed6d3]' : 'hover:text-[#eed6d3]')}>Home</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/accommodations" className={({ isActive }) => (isActive ? 'text-[#eed6d3]' : 'hover:text-[#eed6d3]')}>Brands</NavLink>
+                        <NavLink to="/allproducts" className={({ isActive }) => (isActive ? 'text-[#eed6d3]' : 'hover:text-[#eed6d3]')}>Brands</NavLink>
                     </li>
                     <li>
                         <NavLink to="/about" className={({ isActive }) => (isActive ? 'text-[#eed6d3]' : 'hover:text-[#eed6d3]')}>About Us</NavLink>
@@ -111,7 +111,7 @@ const Navbar = ({ id, onLogout, role }) => {
                             <NavLink to="/" className={({ isActive }) => (isActive ? 'text-[#eed6d3]' : 'text-white')}>Home</NavLink>
                         </li>
                         <li className='border-b border-[#eed6d3]'>
-                            <NavLink to="/accommodations" className={({ isActive }) => (isActive ? 'text-[#eed6d3]' : 'text-white')}>Accommodations</NavLink>
+                            <NavLink to="/allproducts" className={({ isActive }) => (isActive ? 'text-[#eed6d3]' : 'text-white')}>Accommodations</NavLink>
                         </li>
                         <li className='border-b border-[#eed6d3]'>
                             <NavLink to="/about" className={({ isActive }) => (isActive ? 'text-[#eed6d3]' : 'text-white')}>About Us</NavLink>

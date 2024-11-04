@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 const TypewriterEffect = () => {
-    const words = ["Hello!", "Welcome, Here are your Recipes!"];
+    const words = ["Hello!", "Welcome, Here is our website!", "Shopeasy is the best online shopping website!", "We are the best online shopping website!"];
     const [displayedText, setDisplayedText] = useState('');
     const [wordIndex, setWordIndex] = useState(0);
     const [charIndex, setCharIndex] = useState(0);
@@ -32,7 +32,7 @@ const TypewriterEffect = () => {
 
     return (
         <div className="w-full h-full flex justify-center items-center">
-            <h1 id="typewriter" className="text-4xl font-bold text-[#006D5B]">
+            <h1 id="typewriter" className="text-4xl font-bold text-[#67595e]">
                 {displayedText}
             </h1>
         </div>

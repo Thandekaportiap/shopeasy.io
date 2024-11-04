@@ -15,6 +15,8 @@ import LogInAdmin from './pages/adminpages/LogInAdmin';
 import './App.css';
 import Footer from './components/Footer';
 import AddProduct from './pages/adminpages/AddProduct';
+import ManageProductsList from './pages/adminpages/ManageProduct';
+import AllProductsList from './pages/AllProductList';
 
 function App() {
   const [id, setId] = useState(null);
@@ -54,14 +56,16 @@ function App() {
 
   return (
     <>
-      <Navbar />
+      <Navbar  id={id}/>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login/customer" element={<LogInPage role="Customer" handleLogin={handleLogin} />} />
         <Route path="/login/admin" element={<LogInAdmin role="Admin" handleLogin={handleLogin} />} />
         <Route path="/register/admin" element={<RegisterAdmin />} />
         <Route path="/register/customer" element={<RegisterPage />} />
-        <Route path='/addproduct' element={<AddProduct/> }/>
+        <Route path='/addproduct' element={<AddProduct adminId={id}/> }/>
+        <Route path='/manageproduct' element={<ManageProductsList adminId={id}/> }/>
+        <Route path='/allproducts' element={<AllProductsList/>} />
         <Route path="about" element={<AboutPage />} />
         <Route path="contact" element={<Contact />} />
         <Route path="*" element={<NoPage />} />

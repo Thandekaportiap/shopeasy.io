@@ -1,37 +1,45 @@
 import React, { useState } from 'react';
-import { db, storage } from '../../components/Firebase'; 
+import { db } from '../../components/Firebase'; 
 import { collection, addDoc } from 'firebase/firestore';
-import { ref, uploadBytes } from 'firebase/storage';
 import Swal from 'sweetalert2';
 
-const AddProduct = () => {
+const AddProduct = ({ adminId }) => {  // Accept adminId as a prop
     const [productName, setProductName] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
     const [images, setImages] = useState([]);
-    const [imageFiles, setImageFiles] = useState([]);
+    const [previewImages, setPreviewImages] = useState([]);
 
     const handleImageChange = (e) => {
-        setImages(Array.from(e.target.files).map(file => URL.createObjectURL(file)));
-        setImageFiles(Array.from(e.target.files));
+        const files = Array.from(e.target.files);
+        const base64Images = [];
+        const previews = [];
+
+        files.forEach((file) => {
+            if (file && file.type.startsWith("image/")) {
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    base64Images.push(reader.result);
+                    previews.push(reader.result);
+                    setImages([...base64Images]);
+                    setPreviewImages([...previews]);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
-            const productRef = await addDoc(collection(db, 'products'), {
+            await addDoc(collection(db, 'products'), {
                 name: productName,
                 description,
                 price,
+                images, // store base64 images directly in Firestore
+                adminId  // Include adminId in the Firestore document
             });
-
-            const uploadPromises = imageFiles.map((file) => {
-                const imageRef = ref(storage, `products/${productRef.id}/${file.name}`);
-                return uploadBytes(imageRef, file);
-            });
-
-            await Promise.all(uploadPromises);
 
             await Swal.fire({
                 title: 'Success!',
@@ -45,7 +53,7 @@ const AddProduct = () => {
             setDescription('');
             setPrice('');
             setImages([]);
-            setImageFiles([]);
+            setPreviewImages([]);
         } catch (error) {
             await Swal.fire({
                 title: 'Error!',
@@ -100,8 +108,8 @@ const AddProduct = () => {
                         required 
                     />
                     <div className="mt-2">
-                        {images.map((img, index) => (
-                            <img key={index} src={img} alt={`Product ${index}`} className="w-24 h-24 mr-2" />
+                        {previewImages.map((img, index) => (
+                            <img key={index} src={img} alt={`Product Preview ${index}`} className="w-24 h-24 mr-2" />
                         ))}
                     </div>
                 </div>
