@@ -17,6 +17,7 @@ import Footer from './components/Footer';
 import AddProduct from './pages/adminpages/AddProduct';
 import ManageProductsList from './pages/adminpages/ManageProduct';
 import AllProductsList from './pages/AllProductList';
+import ProductDetails from './pages/ProductDetails';
 
 function App() {
   const [id, setId] = useState(null);
@@ -66,6 +67,7 @@ function App() {
         <Route path='/addproduct' element={<AddProduct adminId={id}/> }/>
         <Route path='/manageproduct' element={<ManageProductsList adminId={id}/> }/>
         <Route path='/allproducts' element={<AllProductsList/>} />
+        <Route path="/product/:id" component={ProductDetails} />
         <Route path="about" element={<AboutPage />} />
         <Route path="contact" element={<Contact />} />
         <Route path="*" element={<NoPage />} />
