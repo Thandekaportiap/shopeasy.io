@@ -66,102 +66,94 @@ const RegisterAdmin = () => {
 
     return (
         <div className="font-[sans-serif]">
-            <div className="text-center bg-gradient-to-r from-[#2D3748] to-[#4A5568] min-h-[160px] sm:p-6 p-4">
+            <div className="text-center bg-gradient-to-r from-[#67595e] to-[#eed6d3] min-h-[160px] sm:p-6 p-4">
                 <h4 className="sm:text-3xl text-2xl font-bold text-[#E2E8F0]">Create your new account</h4>
             </div>
 
             <div className="mx-4 mb-4 -mt-16">
-                <form onSubmit={handleSubmit} className="max-w-4xl mx-auto bg-[#F7FAFC] shadow-md sm:p-8 p-4 rounded-md">
+                <form onSubmit={handleSubmit} className="max-w-4xl mx-auto bg-white shadow-[0_2px_13px_-6px_rgba(0,0,0,0.4)] sm:p-8 p-4 rounded-md">
                     <div className="grid md:grid-cols-2 gap-8">
                         <div>
-                            <label className="text-gray-700 text-sm mb-2 block">Company Name</label>
+                            <label className="text-[#67595e] text-sm mb-2 block">Company Name</label>
                             <input 
                                 type="text" 
                                 value={company}
                                 onChange={(e) => setCompany(e.target.value)}
-                                className="bg-[#EDF2F7] focus:bg-white w-full text-sm text-gray-700 px-4 py-3 rounded-md outline-[#3182CE] transition-all" 
+                                className="bg-[#f7fafc] focus:bg-white w-full text-sm text-[#67595e] px-4 py-3 rounded-md outline-[#3182CE] transition-all" 
                                 placeholder="Enter company name" 
                                 required
                             />
                         </div>
                         <div>
-                            <label className="text-gray-700 text-sm mb-2 block">Username</label>
+                            <label className="text-[#67595e] text-sm mb-2 block">Username</label>
                             <input 
                                 type="text" 
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
-                                className="bg-[#EDF2F7] focus:bg-white w-full text-sm text-gray-700 px-4 py-3 rounded-md outline-[#3182CE] transition-all" 
+                                className="bg-[#f7fafc] focus:bg-white w-full text-sm text-[#67595e] px-4 py-3 rounded-md outline-[#3182CE] transition-all" 
                                 placeholder="Enter username" 
                                 required
                             />
                         </div>
                         <div>
-                            <label className="text-gray-700 text-sm mb-2 block">First Name</label>
+                            <label className="text-[#67595e] text-sm mb-2 block">First Name</label>
                             <input 
                                 type="text" 
                                 value={firstName}
                                 onChange={(e) => setFirstName(e.target.value)}
-                                className="bg-[#EDF2F7] focus:bg-white w-full text-sm text-gray-700 px-4 py-3 rounded-md outline-[#3182CE] transition-all" 
+                                className="bg-[#f7fafc] focus:bg-white w-full text-sm text-[#67595e] px-4 py-3 rounded-md outline-[#3182CE] transition-all" 
                                 placeholder="Enter first name" 
                                 required
                             />
                         </div>
                         <div>
-                            <label className="text-gray-700 text-sm mb-2 block">Last Name</label>
+                            <label className="text-[#67595e] text-sm mb-2 block">Last Name</label>
                             <input 
                                 type="text" 
                                 value={lastName}
                                 onChange={(e) => setLastName(e.target.value)}
-                                className="bg-[#EDF2F7] focus:bg-white w-full text-sm text-gray-700 px-4 py-3 rounded-md outline-[#3182CE] transition-all" 
+                                className="bg-[#f7fafc] focus:bg-white w-full text-sm text-[#67595e] px-4 py-3 rounded-md outline-[#3182CE] transition-all" 
                                 placeholder="Enter last name" 
                                 required
                             />
                         </div>
                         <div>
-                            <label className="text-gray-700 text-sm mb-2 block">Email Id</label>
+                            <label className="text-[#67595e] text-sm mb-2 block">Email Id</label>
                             <input 
                                 type="email" 
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                className="bg-[#EDF2F7] focus:bg-white w-full text-sm text-gray-700 px-4 py-3 rounded-md outline-[#3182CE] transition-all" 
+                                className="bg-[#f7fafc] focus:bg-white w-full text-sm text-[#67595e] px-4 py-3 rounded-md outline-[#3182CE] transition-all" 
                                 placeholder="Enter email" 
                                 required
                             />
                         </div>
                         <div>
-                            <label className="text-gray-700 text-sm mb-2 block">Mobile No.</label>
+                            <label className="text-[#67595e] text-sm mb-2 block">Mobile No.</label>
                             <input 
                                 type="tel" 
                                 value={mobile}
                                 onChange={(e) => setMobile(e.target.value)}
-                                className="bg-[#EDF2F7] focus:bg-white w-full text-sm text-gray-700 px-4 py-3 rounded-md outline-[#3182CE] transition-all" 
+                                className="bg-[#f7fafc] focus:bg-white w-full text-sm text-[#67595e] px-4 py-3 rounded-md outline-[#3182CE] transition-all" 
                                 placeholder="Enter mobile number" 
                                 required
                             />
                         </div>
                         <div>
-                            <label className="text-gray-700 text-sm mb-2 block">Password</label>
+                            <label className="text-[#67595e] text-sm mb-2 block">Password</label>
                             <input 
                                 type="password" 
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                className="bg-[#EDF2F7] focus:bg-white w-full text-sm text-gray-700 px-4 py-3 rounded-md outline-[#3182CE] transition-all" 
+                                className="bg-[#f7fafc] focus:bg-white w-full text-sm text-[#67595e] px-4 py-3 rounded-md outline-[#3182CE] transition-all" 
                                 placeholder="Enter password" 
                                 required
                             />
                         </div>
-                        <div>
-                            <label className="text-gray-700 text-sm mb-2 block">Profile Picture</label>
-                            <input 
-                                type="file" 
-                                accept="image/*" 
-                                onChange={handleFileChange}
-                                className="bg-[#EDF2F7] focus:bg-white w-full text-sm text-gray-700 px-4 py-3 rounded-md outline-[#3182CE] transition-all" 
-                            />
-                        </div>
+                     
                     </div>
                     <div className="mt-8">
-                        <button type="submit" className="py-3 px-6 text-sm tracking-wider font-semibold rounded-md text-white bg-[#2D3748] hover:bg-[#4A5568] focus:outline-none">
+                        <button type="submit" className="py-3 px-6 text-sm tracking-wider font-semibold rounded-md text-white bg-[#67595e] hover:bg-[#503f45] focus:outline-none">
                             Sign up
                         </button>
                     </div>

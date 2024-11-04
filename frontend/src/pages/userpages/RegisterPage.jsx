@@ -125,15 +125,7 @@ const RegisterPage = () => {
                                 required
                             />
                         </div>
-                        <div>
-                            <label className="text-gray-800 text-sm mb-2 block">Profile Picture</label>
-                            <input
-                                type="file"
-                                accept="image/*"
-                                onChange={handleFileChange}
-                                className="bg-gray-100 w-full text-sm text-gray-800 px-4 py-3 rounded-md"
-                            />
-                        </div>
+                      
                     </div>
                     <div className="mt-8">
                         <button type="submit" className="py-3 px-6 text-sm tracking-wider font-semibold rounded-md text-white bg-[#67595e] hover:bg-[#eec603] focus:outline-none" disabled={loading}>

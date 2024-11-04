@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'; // Ensure you import useEffect
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom'; // Ensure useNavigate is imported
-// import { setUserId, clearUserId } from './store/actions/userActions';
+import { setUserId, clearUserId } from './Features/UsersSlice';
 import Navbar from './components/NavBar';
 import { Routes, Route } from "react-router-dom";
 import HomePage from './pages/HomePage';
@@ -20,18 +20,18 @@ function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate(); // Using useNavigate here
 
-  // useEffect(() => {
-  //   const savedUserId = localStorage.getItem('loggedInUserId');
-  //   const savedUserRole = localStorage.getItem('userRole');
+  useEffect(() => {
+    const savedUserId = localStorage.getItem('loggedInUserId');
+    const savedUserRole = localStorage.getItem('userRole');
 
-  //   if (savedUserId) {
-  //     setId(savedUserId);
-  //     dispatch(setUserId(savedUserId));
-  //   }
-  //   if (savedUserRole) {
-  //     setUserRole(savedUserRole);
-  //   }
-  // }, [dispatch]);
+    if (savedUserId) {
+      setId(savedUserId);
+      dispatch(setUserId(savedUserId));
+    }
+    if (savedUserRole) {
+      setUserRole(savedUserRole);
+    }
+  }, [dispatch]);
 
   const handleLogin = (userId, role) => {
     setId(userId);
