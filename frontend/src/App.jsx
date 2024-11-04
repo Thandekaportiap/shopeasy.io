@@ -13,6 +13,8 @@ import RegisterPage from './pages/userpages/RegisterPage';
 import RegisterAdmin from './pages/adminpages/RegisterAdmin';
 import LogInAdmin from './pages/adminpages/LogInAdmin';
 import './App.css';
+import Footer from './components/Footer';
+import AddProduct from './pages/adminpages/AddProduct';
 
 function App() {
   const [id, setId] = useState(null);
@@ -59,10 +61,12 @@ function App() {
         <Route path="/login/admin" element={<LogInAdmin role="Admin" handleLogin={handleLogin} />} />
         <Route path="/register/admin" element={<RegisterAdmin />} />
         <Route path="/register/customer" element={<RegisterPage />} />
+        <Route path='/addproduct' element={<AddProduct/> }/>
         <Route path="about" element={<AboutPage />} />
         <Route path="contact" element={<Contact />} />
         <Route path="*" element={<NoPage />} />
       </Routes>
+      <Footer/>
     </>
   );
 }
