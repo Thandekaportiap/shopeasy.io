@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
@@ -11,8 +11,11 @@
   "description": "",
   "dependencies": {
     "@stripe/stripe-js": "^4.9.0",
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
+    "firebase-admin": "^12.7.0",
     "stripe": "^17.3.1"
   }
 }

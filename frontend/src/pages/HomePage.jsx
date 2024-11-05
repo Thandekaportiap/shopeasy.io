@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // Don't forget to import Link from react-router-dom
-// import { TiShoppingCart } from 'react-icons/ti';
+import { Link } from 'react-router-dom'; 
+import { TiShoppingCart } from 'react-icons/ti';
 
 const HomePage = () => {
   let image = require('../assets/images (1).jpeg');
@@ -19,10 +19,10 @@ const HomePage = () => {
             Shopping made easy with your favourite products
           </h4>
           <div className='mt-8 flex flex-col items-center justify-center'>
-            <Link to={'/shoppingList'}>
+            <Link to={'/allproducts'}>
               <button type="button" className='bg-[#675953] text-[#eed6d3] text-lg lg:text-2xl font-semibold px-4 py-2 rounded-md mt-8 flex items-center'>
                 Shop Now
-                {/* <TiShoppingCart className="ml-2 text-[#eed6d3]" size={20} /> */}
+                <TiShoppingCart className="ml-2 text-[#eed6d3]" size={20} />
               </button>
             </Link>
           </div>

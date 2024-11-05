@@ -1,51 +1,18 @@
 const express = require('express');
-const admin = require('firebase-admin');
 const cors = require('cors');
+const bodyParser = require('body-parser');
+const authRoutes = require('./routes/authRoutes');
+const productRoutes = require('./routes/productRoutes');
 require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
-
-// Middleware
 app.use(cors());
-app.use(express.json());
+app.use(bodyParser.json());
 
-// Initialize Firebase Admin SDK
-const serviceAccount = require('./serviceAccountKey.json');
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-});
+app.use('/api/auth', authRoutes);
+app.use('/api/products', productRoutes);
 
-// Firestore database reference
-const db = admin.firestore();
-
-// User registration
-app.post('/api/auth/register', async (req, res) => {
-    const { email, password } = req.body;
-    try {
-        const userRecord = await admin.auth().createUser({ email, password });
-        res.status(201).json({ uid: userRecord.uid });
-    } catch (error) {
-        res.status(400).json({ error: error.message });
-    }
-});
-
-// User login
-app.post('/api/auth/login', async (req, res) => {
-    const { email, password } = req.body;
-    try {
-        const userRecord = await admin.auth().getUserByEmail(email);
-        const token = await admin.auth().createCustomToken(userRecord.uid);
-        res.json({ token });
-    } catch (error) {
-        res.status(401).json({ error: 'Invalid credentials' });
-    }
-});
-
-// Product routes
-app.use('/api/products', require('./routes/products')(db));
-
-// Start the server
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    console.log(`Server running on port ${PORT}`);
 });
