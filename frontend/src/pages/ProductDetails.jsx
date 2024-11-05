@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { doc, getDoc, setDoc, } from "firebase/firestore";
+import { doc, getDoc, setDoc, addDoc, collection, arrayUnion } from "firebase/firestore";
 import { db } from '../components/Firebase';
 
 const ProductDetails = ({customerId}) => {
@@ -41,7 +41,6 @@ const ProductDetails = ({customerId}) => {
             console.error("Error adding to cart:", error);
         }
     };
-
    
 
     if (!product) return <div>Loading...</div>;
