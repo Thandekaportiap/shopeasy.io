@@ -53,10 +53,10 @@ function AdminProfile({ userId }) {
     };
 
     return (
-        <div className="flex items-center justify-center h-screen bg-[#68bbe3]">
+        <div className="flex items-center justify-center h-screen">
             <div className="bg-white overflow-hidden shadow-lg rounded-lg border border-gray-200 max-w-3xl w-full">
                 <div className="px-6 py-5">
-                    <h3 className="font-serif text-3xl leading-6 font-medium text-[#003060]">
+                    <h3 className="font-serif text-3xl leading-6 font-medium text-[#67595e]">
                         {userDetails?.firstName}'s Profile
                     </h3>
                     <p className="mt-1 max-w-2xl text-2xl text-gray-600">
@@ -66,25 +66,25 @@ function AdminProfile({ userId }) {
                 <div className="border-t border-gray-200 px-6 py-5">
                     <dl className="sm:divide-y sm:divide-gray-200">
                         <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-                            <dt className="text-2xl font-medium text-[#003060]">Full name</dt>
+                            <dt className="text-2xl font-medium text-[#67595e]">Full name</dt>
                             <dd className="mt-1 text-2xl text-gray-900 sm:mt-0 sm:col-span-2">
                                 {userDetails?.firstName} {userDetails?.lastName}
                             </dd>
                         </div>
                         <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-                            <dt className="text-2xl font-medium text-[#003060]">Email address</dt>
+                            <dt className="text-2xl font-medium text-[#67595e]">Email address</dt>
                             <dd className="mt-1 text-2xl text-gray-900 sm:mt-0 sm:col-span-2">
                                 {userDetails?.email}
                             </dd>
                         </div>
                         <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-                            <dt className="text-2xl font-medium text-[#003060]">Phone number</dt>
+                            <dt className="text-2xl font-medium text-[#67595e]">Phone number</dt>
                             <dd className="mt-1 text-2xl text-gray-900 sm:mt-0 sm:col-span-2">
                                 {userDetails?.mobile}
                             </dd>
                         </div>
                         <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4">
-                            <dt className="text-2xl font-medium text-[#003060]">Address</dt>
+                            <dt className="text-2xl font-medium text-[#67595e]">Address</dt>
                             <dd className="mt-1 text-2xl text-gray-900 sm:mt-0 sm:col-span-2">
                                 123 Main St<br/>
                                 Anytown, PMB 12345
@@ -94,13 +94,13 @@ function AdminProfile({ userId }) {
                 </div>
                 <div className="px-6 py-5 flex justify-around">
                     <button 
-                        className="bg-[#68bbe3] hover:bg-[#0e86d4] text-white font-bold py-2 px-4 rounded-full"
+                        className="bg-[#68bbe3] hover:bg-[#a49393] text-white font-bold py-2 px-4 rounded-full"
                         onClick={handleManageProducts}
                     >
                         Manage Products
                     </button>
                     <button 
-                        className="bg-[#68bbe3] hover:bg-[#0e86d4] text-white font-bold py-2 px-4 rounded-full"
+                        className="bg-[#68bbe3] hover:bg-[#a49393] text-white font-bold py-2 px-4 rounded-full"
                         onClick={handleManageOrders}
                     >
                         Manage Orders

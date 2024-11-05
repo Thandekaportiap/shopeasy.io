@@ -20,6 +20,7 @@ import AllProductsList from './pages/AllProductList';
 import ProductDetails from './pages/ProductDetails';
 import Cart from './pages/userpages/Cart';
 import AdminProfile from './pages/adminpages/adminProfile';
+import ManageOrders from './pages/adminpages/ManageOrders';
 
 
 function App() {
@@ -61,7 +62,8 @@ function App() {
   return (
     <>
       <Navbar id={id} onLogout={handleLogout} />
-      <Routes>
+     <div className='min-h-screen'>
+     <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login/customer" element={<LogInPage role="Customer" handleLogin={handleLogin} />} />
         <Route path="/login/admin" element={<LogInAdmin role="Admin" handleLogin={handleLogin} />} />
@@ -74,9 +76,10 @@ function App() {
         <Route path='/adminProfile' element={<AdminProfile userId={id} />} />
         <Route path='/cart' element={<Cart customerId={id} />} />
         <Route path="about" element={<AboutPage />} />
-        <Route path="contact" element={<Contact />} />
+        <Route path="/contactus" element={<Contact />} />
         <Route path="*" element={<NoPage />} />
       </Routes>
+     </div>
       <Footer />
     </>
   );
