@@ -44,9 +44,11 @@ const ProductCard = ({ product }) => {
     };
 
     return (
+        <>
+    
         <div className="relative border rounded-lg shadow-md p-4 overflow-hidden min-h-[200px]">
     {/* Animated Background */}
-    <div className="absolute inset-0 bg-gradient-to-b from-cyan-500 to-pink-500 animate-rotate"></div>
+    <div className="absolute inset-0 bg-gradient-to-b from-[#eed6d3] to-[#67595e] animate-rotate"></div>
 
     <div className="absolute inset-1 bg-white rounded-lg shadow-md h-full p-4 flex flex-col justify-between">
         <div>
@@ -130,6 +132,7 @@ const ProductCard = ({ product }) => {
                 </div>
             )}
         </div>
+        </>
     );
 };
 

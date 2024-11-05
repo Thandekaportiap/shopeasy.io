@@ -4,6 +4,8 @@ import { fetchProductsByAdminId } from '../../Features/Product/ProductSlice';
 import ProductCard from '../../components/ProductCard';
 import { doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { db } from '../../components/Firebase'; 
+import { Link } from 'react-router-dom';
+
 
 const ManageProductsList = ({ adminId }) => {
     const dispatch = useDispatch();
@@ -23,6 +25,7 @@ const ManageProductsList = ({ adminId }) => {
             {products.map((product) => (
                 <ProductCard key={product.id} product={product}  />
             ))}
+          <Link to="/addproduct">  <button className='py-2 px-4 bg-blue-500 text-white rounded-md'>Add Product</button></Link>
         </div>
     );
 };
