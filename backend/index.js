@@ -1,28 +1,35 @@
-import express from 'express';
-import cors from 'cors';
-import Stripe from 'stripe';
+const express = require('express');
+const Stripe = require('stripe');
+const stripe = new Stripe('YOUR_STRIPE_SECRET_KEY'); // Replace with your Stripe secret key
+const router = express.Router();
 
-const app = express();
-const stripe = new Stripe('sk_test_51QBwYZA9hsbb7bPkozoWMsztepZqXfX5AdK4VvuErx9jSWUer0ojxe5IelRakrJw6PRWO9NnsrsCiLSkBWbylJez00jOXPQH6d');
+router.post('/create-checkout-session', async (req, res) => {
+    const { productId, quantity } = req.body;
 
-app.use(cors());
-app.use(express.json());
+    // Fetch product details from your database using productId
+    // Assuming you have a function to get the product details
+    const product = await getProductById(productId); // Replace with your actual product fetching logic
 
-app.post('/create-payment-intent', async (req, res) => {
-    const { amount } = req.body;
-    try {
-        const paymentIntent = await stripe.paymentIntents.create({
-            amount,
-            currency: 'zar', // Change to your currency
-        });
-        res.json({ clientSecret: paymentIntent.client_secret });
-    } catch (error) {
-        console.error("Error creating payment intent: ", error); // Log error if it fails
-        res.status(500).send(error);
-    }
+    const session = await stripe.checkout.sessions.create({
+        payment_method_types: ['card'],
+        line_items: [{
+            price_data: {
+                currency: 'usd',
+                product_data: {
+                    name: product.name,
+                    // Optionally, add an image
+                    images: [product.image],
+                },
+                unit_amount: product.price * 100, // Stripe expects amount in cents
+            },
+            quantity: quantity,
+        }],
+        mode: 'payment',
+        success_url: 'https://your-success-url.com', // Replace with your success URL
+        cancel_url: 'https://your-cancel-url.com', // Replace with your cancel URL
+    });
+
+    res.json({ id: session.id });
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+module.exports = router;
