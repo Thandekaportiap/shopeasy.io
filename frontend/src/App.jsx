@@ -19,6 +19,8 @@ import ManageProductsList from './pages/adminpages/ManageProduct';
 import AllProductsList from './pages/AllProductList';
 import ProductDetails from './pages/ProductDetails';
 import Cart from './pages/userpages/Cart';
+import AdminProfile from './pages/adminpages/adminProfile';
+
 
 function App() {
   const [id, setId] = useState(null);
@@ -58,7 +60,7 @@ function App() {
 
   return (
     <>
-      <Navbar id={id} handleLogout={handleLogout} />
+      <Navbar id={id} onLogout={handleLogout} />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login/customer" element={<LogInPage role="Customer" handleLogin={handleLogin} />} />
@@ -69,6 +71,7 @@ function App() {
         <Route path='/manageproduct' element={<ManageProductsList adminId={id} />} />
         <Route path='/allproducts' element={<AllProductsList customerId={id} />} />
         <Route path="/product/:id" element={<ProductDetails customerId={id} />} />
+        <Route path='/adminProfile' element={<AdminProfile userId={id} />} />
         <Route path='/cart' element={<Cart customerId={id} />} />
         <Route path="about" element={<AboutPage />} />
         <Route path="contact" element={<Contact />} />

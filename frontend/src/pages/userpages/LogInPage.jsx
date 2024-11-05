@@ -30,7 +30,7 @@ const LogInPage = ({ handleLogin }) => {
                 confirmButtonText: 'OK',
             });
 
-            navigate("/userprofile");
+            navigate("/allproducts");
 
         } catch (error) {
             console.log(error);
