@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { firestore } from '../../Firebase';
+import { getFirestore } from '../../components/Firebase';
 
 // Async thunk to fetch user cart
 export const fetchUserCart = createAsyncThunk('cart/fetchUserCart', async (customerId) => {
