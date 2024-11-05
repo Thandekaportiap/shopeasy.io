@@ -1,33 +1,13 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { addToCart, fetchCart, updateCartItem, removeItem } from '../../components/CartServiceFuntion';
+import { firestore } from '../../Firebase';
 
-// Thunk to fetch the user's cart
+// Async thunk to fetch user cart
 export const fetchUserCart = createAsyncThunk('cart/fetchUserCart', async (customerId) => {
-    const items = await fetchCart(customerId);
-    console.log("Fetched cart items:", items); // This should log your cart items
-    return items;
+    const cartDoc = await firestore.collection('carts').doc(customerId).get();
+    return cartDoc.exists ? { items: cartDoc.data().products || [] } : { items: [] };
 });
 
-
-// Thunk to add an item to the cart
-export const addItemToCart = createAsyncThunk('cart/addItemToCart', async ({ customerId, item }) => {
-    await addToCart(customerId, item);
-    return item; // Returning the added item
-});
-
-// Thunk to update the quantity of an item in the cart
-export const updateItemQuantity = createAsyncThunk('cart/updateItemQuantity', async ({ customerId, itemId, quantity }) => {
-    await updateCartItem(customerId, itemId, quantity);
-    return { itemId, quantity }; // Return item ID and new quantity
-});
-
-// Thunk to remove an item from the cart
-export const removeItemFromCart = createAsyncThunk('cart/removeItemFromCart', async ({ customerId, itemId }) => {
-    await removeItem(customerId, itemId); // Pass the itemId to remove it
-    return itemId; // Return itemId for easier state management
-});
-
-// Create the cart slice
+// Slice definition
 const cartSlice = createSlice({
     name: 'cart',
     initialState: {
@@ -36,7 +16,33 @@ const cartSlice = createSlice({
         error: null,
     },
     reducers: {
-        // You can define any additional synchronous reducers here if needed
+        addItemToCart(state, action) {
+            const { customerId, item } = action.payload;
+            const existingItem = state.items.find(i => i.productId === item.productId);
+            if (existingItem) {
+                existingItem.quantity += item.quantity;
+            } else {
+                state.items.push({ ...item, quantity: item.quantity });
+            }
+            const cartRef = firestore.collection('carts').doc(customerId);
+            cartRef.set({ products: state.items }, { merge: true });
+        },
+        updateItemQuantity(state, action) {
+            const { customerId, itemId, quantity } = action.payload;
+            const existingItem = state.items.find(item => item.productId === itemId);
+            if (existingItem) {
+                existingItem.quantity = quantity;
+                const cartRef = firestore.collection('carts').doc(customerId);
+                cartRef.set({ products: state.items }, { merge: true });
+            }
+        },
+        removeItemFromCart(state, action) {
+            const { customerId, itemId } = action.payload;
+            const updatedItems = state.items.filter(item => item.productId !== itemId);
+            const cartRef = firestore.collection('carts').doc(customerId);
+            cartRef.set({ products: updatedItems }, { merge: true });
+            return { ...state, items: updatedItems };
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -44,37 +50,15 @@ const cartSlice = createSlice({
                 state.status = 'loading';
             })
             .addCase(fetchUserCart.fulfilled, (state, action) => {
-                state.items = action.payload; // Set fetched items
                 state.status = 'succeeded';
+                state.items = action.payload.items;
             })
             .addCase(fetchUserCart.rejected, (state, action) => {
                 state.status = 'failed';
-                state.error = action.error.message; // Store the error message
-            })
-            .addCase(addItemToCart.fulfilled, (state, action) => {
-                // Optionally merge the new item into the existing items
-                const existingItem = state.items.find(item => item.id === action.payload.id);
-                if (existingItem) {
-                    // If the item already exists, increase the quantity
-                    existingItem.quantity += 1;
-                } else {
-                    // Otherwise, add the new item with quantity 1
-                    state.items.push({ ...action.payload, quantity: 1 });
-                }
-            })
-            .addCase(updateItemQuantity.fulfilled, (state, action) => {
-                const { itemId, quantity } = action.payload;
-                const existingItem = state.items.find(item => item.id === itemId);
-                if (existingItem) {
-                    existingItem.quantity = quantity; // Update the quantity
-                }
-            })
-            .addCase(removeItemFromCart.fulfilled, (state, action) => {
-                const itemId = action.payload;
-                state.items = state.items.filter(item => item.id !== itemId); // Remove the item
+                state.error = action.error.message;
             });
     },
 });
 
-// Export the reducer to be used in the store
+export const { addItemToCart, updateItemQuantity, removeItemFromCart } = cartSlice.actions;
 export default cartSlice.reducer;

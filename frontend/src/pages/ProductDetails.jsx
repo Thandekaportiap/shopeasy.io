@@ -4,7 +4,7 @@ import { doc, getDoc, addDoc, collection } from "firebase/firestore";
 import { db } from '../components/Firebase';
 import { loadStripe } from '@stripe/stripe-js';
 
-const stripePromise = loadStripe('YOUR_STRIPE_PUBLISHABLE_KEY'); // Replace with your Stripe publishable key
+const stripePromise = loadStripe('pk_test_51QBwYZA9hsbb7bPk3qURxjQEH9qKpNV9wWbVrvqwBdAE9bwscO3RjzcRcrw6RcfGwoClNsqvBCkz2dwxabzRvGCN00TAomN0jY'); // Replace with your Stripe publishable key
 
 const ProductDetails = ({ customerId }) => {
     const { id } = useParams();
@@ -45,30 +45,38 @@ const ProductDetails = ({ customerId }) => {
 
     const handleBuyNow = async () => {
         const stripe = await stripePromise;
-
-        // Create a checkout session on your backend
-        const response = await fetch('/api/create-checkout-session', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                productId: id,
-                quantity: quantity,
-            }),
-        });
-
-        const session = await response.json();
-
-        // Redirect to Stripe checkout
-        const result = await stripe.redirectToCheckout({
-            sessionId: session.id,
-        });
-
-        if (result.error) {
-            console.error(result.error.message);
+        if (!stripe) {
+            console.error("Stripe has not been loaded correctly.");
+            return;
+        }
+    
+        try {
+            const response = await fetch('/api/create-checkout-session', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    productId: id,   // Make sure `id` is defined (product ID)
+                    quantity: 1,     // Update as necessary for the desired quantity
+                }),
+            });
+    
+            if (!response.ok) {
+                throw new Error("Failed to create checkout session");
+            }
+    
+            const session = await response.json();
+            const result = await stripe.redirectToCheckout({ sessionId: session.id });
+    
+            if (result.error) {
+                console.error("Stripe checkout error:", result.error.message);
+            }
+        } catch (error) {
+            console.error("Error in handleBuyNow:", error);
         }
     };
+    
 
     if (!product) return <div>Loading...</div>;
 
@@ -79,7 +87,10 @@ const ProductDetails = ({ customerId }) => {
                     <div className="lg:col-span-3">
                         <img src={product.image || 'default-image-url'} alt={product.name} className="object-cover w-full rounded" />
                         <h2 className="text-2xl font-extrabold text-gray-800">{product.name}</h2>
-                        <p className="text-3xl font-bold text-gray-800">${product.price.toFixed(2)}</p>
+                        <p className="text-3xl font-bold text-gray-800">
+    ${product.price ? Number(product.price).toFixed(2) : '0.00'}
+</p>
+
                         <div className="flex flex-wrap gap-4 mt-4">
                             <input 
                                 type="number" 
