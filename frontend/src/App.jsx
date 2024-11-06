@@ -21,6 +21,8 @@ import ProductDetails from './pages/ProductDetails';
 import Cart from './pages/userpages/Cart';
 import AdminProfile from './pages/adminpages/adminProfile';
 import ManageOrders from './pages/adminpages/ManageOrders';
+import Success from './components/Success';
+import Cancel from './components/Cancel';
 
 
 function App() {
@@ -75,6 +77,8 @@ function App() {
         <Route path="/product/:id" element={<ProductDetails customerId={id} />} />
         <Route path='/adminProfile' element={<AdminProfile userId={id} />} />
         <Route path='/cart' element={<Cart customerId={id} />} />
+        <Route path="/success" element={<Success />} />
+        <Route path="/cancel" element={<Cancel />} />
         <Route path="about" element={<AboutPage />} />
         <Route path="/contactus" element={<Contact />} />
         <Route path="*" element={<NoPage />} />

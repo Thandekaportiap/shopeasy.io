@@ -52,7 +52,7 @@ const Navbar = ({ id, onLogout, role }) => {
                 <div className='hidden space-x-4 md:flex'>
                     {id ? (
                         <>
-                            <Link to={role === "Admin" ? "/adminProfile" : "/userProfile"}>
+                            <Link to={role === "Admin" ? "/adminProfile" : "/cart"}>
                                 <button className="flex items-center space-x-2 border border-[#eed6d3] text-[#eed6d3] py-2 hover:bg-[#eed6d3] hover:text-[#67595e] px-4 font-bold rounded-md">
                                     <AiOutlineUser />
                                     <span>Profile</span>
@@ -105,13 +105,13 @@ const Navbar = ({ id, onLogout, role }) => {
                 </div>
 
                 <div className={!openNav ? 'fixed left-0 top-0 w-[60%] bg-[#67595e] h-full block pl-4 pt-4 z-50 ease-in-out duration-500 md:hidden' : "fixed left-[100%] ease-in-out duration-500"}>
-                    <h1 className='text-[27px] font-bold text-white'>AWBookings.io</h1>
+                    <h1 className='text-[27px] font-bold text-white'>Shopeasy.io</h1>
                     <ul className='block pt-8 space-y-4'>
                         <li className='border-b border-[#eed6d3]'>
                             <NavLink to="/" className={({ isActive }) => (isActive ? 'text-[#eed6d3]' : 'text-white')}>Home</NavLink>
                         </li>
                         <li className='border-b border-[#eed6d3]'>
-                            <NavLink to="/allproducts" className={({ isActive }) => (isActive ? 'text-[#eed6d3]' : 'text-white')}>Accommodations</NavLink>
+                            <NavLink to="/allproducts" className={({ isActive }) => (isActive ? 'text-[#eed6d3]' : 'text-white')}>Brands</NavLink>
                         </li>
                         <li className='border-b border-[#eed6d3]'>
                             <NavLink to="/about" className={({ isActive }) => (isActive ? 'text-[#eed6d3]' : 'text-white')}>About Us</NavLink>
