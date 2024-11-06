@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { TiShoppingCart } from 'react-icons/ti';
 
 const HomePage = () => {
-  let image = require('../assets/images (1).jpeg');
+  let image = require('../assets/images(1).png');
   return (
     <>
       <section className='w-full h-screen flex flex-col lg:flex-row items-center justify-between px-4 lg:px-12 text-[#675953]'>
