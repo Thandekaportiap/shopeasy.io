@@ -80,15 +80,20 @@ const ProductDetails = ({ customerId }) => {
 
     if (!product) return <div>Loading...</div>;
 
+    console.log(product)
+
     return (
         <div className="font-sans bg-white">
             <div className="max-w-4xl p-4 mx-auto lg:max-w-7xl">
-                <div className="grid items-start grid-cols-1 lg:grid-cols-5 gap-12 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] p-6 rounded-lg">
+                <div className="grid items-start grid-cols-1 lg:grid-cols-5 gap-12 shadow-md shadow-[#eed6d3] p-6 rounded-lg">
                     <div className="lg:col-span-3">
-                        <img src={product.image || 'default-image-url'} alt={product.name} className="object-cover w-full rounded" />
-                        <h2 className="text-2xl font-extrabold text-gray-800">{product.name}</h2>
+                        <img src={product.images || 'default-image-url'} alt={product.name} className="object-cover rounded" />
+                        <h2 className="text-2xl font-extrabold text-gray-800 my-4">{product.name}</h2>
+
+                        <h4 className="text-2xl font-extrabold text-[#67595e] my-4">{product.description}</h4>
+                        
                         <p className="text-3xl font-bold text-gray-800">
-    ${product.price ? Number(product.price).toFixed(2) : '0.00'}
+    R{product.price ? Number(product.price).toFixed(2) : '0.00'}
 </p>
 
                         <div className="flex flex-wrap gap-4 mt-4">
