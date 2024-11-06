@@ -37,43 +37,44 @@ const ProductDetails = ({ customerId }) => {
                 price: product.price,
                 quantity: quantity
             });
-            console.log("Product added to cart!");
+            alert('Item added to cart successfully!');
         } catch (error) {
             console.error("Error adding to cart:", error);
         }
     };
 
     const handleBuyNow = async () => {
-        const stripe = await stripePromise;
-        if (!stripe) {
-            console.error("Stripe has not been loaded correctly.");
-            return;
-        }
-    
         try {
-            const response = await fetch('/api/create-checkout-session', {
+            const response = await fetch('https://shopeasy-io-2.onrender.com/api/create-checkout-session', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    productId: id,   // Make sure `id` is defined (product ID)
-                    quantity: 1,     // Update as necessary for the desired quantity
-                }),
+                    items: cartItems.map(item => ({
+                        productName: item.productName,
+                        price: item.price,
+                        quantity: item.quantity,
+                    }))
+                })
             });
     
             if (!response.ok) {
-                throw new Error("Failed to create checkout session");
+                throw new Error('Failed to create checkout session');
             }
     
             const session = await response.json();
+            const stripe = await stripePromise;
             const result = await stripe.redirectToCheckout({ sessionId: session.id });
     
             if (result.error) {
-                console.error("Stripe checkout error:", result.error.message);
+                console.error('Stripe checkout error:', result.error.message);
+            } else {
+                // Once payment is successful, create order and clear the cart
+                createOrder();
             }
         } catch (error) {
-            console.error("Error in handleBuyNow:", error);
+            console.error('Error in handleCheckout:', error);
         }
     };
     

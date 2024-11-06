@@ -54,8 +54,8 @@ const Navbar = ({ id, onLogout, role }) => {
                         <>
                             <Link to={role === "Admin" ? "/adminProfile" : "/cart"}>
                                 <button className="flex items-center space-x-2 border border-[#eed6d3] text-[#eed6d3] py-2 hover:bg-[#eed6d3] hover:text-[#67595e] px-4 font-bold rounded-md">
-                                    <AiOutlineUser />
-                                    <span>Profile</span>
+                                    {/* <AiOutlineUser /> */}
+                                  {role ==="admin" ? <span>Profile</span> : <span>Cart</span>}
                                 </button>
                             </Link>
                             <button onClick={onLogout} className="bg-[#eed6d3] px-4 py-2 rounded text-[#67595e]">Logout</button>

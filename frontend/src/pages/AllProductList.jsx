@@ -27,6 +27,7 @@ const AllProductsList = ({ customerId }) => {
           setFavorites((prevFavorites) => [...prevFavorites, favoriteItem]);
         }
       };
+      
 
     console.log(products)
 
