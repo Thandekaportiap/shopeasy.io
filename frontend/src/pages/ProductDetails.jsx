@@ -51,32 +51,30 @@ const ProductDetails = ({ customerId }) => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    items: cartItems.map(item => ({
-                        productName: item.productName,
-                        price: item.price,
-                        quantity: item.quantity,
-                    }))
+                    items: [{
+                        productName: product.name,
+                        price: product.price,
+                        quantity: quantity,
+                    }]
                 })
             });
-    
+
             if (!response.ok) {
                 throw new Error('Failed to create checkout session');
             }
-    
+
             const session = await response.json();
             const stripe = await stripePromise;
             const result = await stripe.redirectToCheckout({ sessionId: session.id });
-    
+
             if (result.error) {
                 console.error('Stripe checkout error:', result.error.message);
-            } else {
-                // Once payment is successful, create order and clear the cart
-                createOrder();
             }
         } catch (error) {
-            console.error('Error in handleCheckout:', error);
+            console.error('Error in handleBuyNow:', error);
         }
     };
+
     
 
     if (!product) return <div>Loading...</div>;
