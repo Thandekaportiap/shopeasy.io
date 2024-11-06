@@ -63,7 +63,7 @@ function App() {
 
   return (
     <>
-      <Navbar id={id} onLogout={handleLogout} />
+      <Navbar id={id} onLogout={handleLogout} role={userRole}/>
      <div className='min-h-screen'>
      <Routes>
         <Route path="/" element={<HomePage />} />

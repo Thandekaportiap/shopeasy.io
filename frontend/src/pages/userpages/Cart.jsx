@@ -99,9 +99,49 @@ const Cart = ({ customerId }) => {
     
             if (result.error) {
                 console.error('Stripe checkout error:', result.error.message);
+            } else {
+                // Once payment is successful, create order and clear the cart
+                createOrder();
             }
         } catch (error) {
             console.error('Error in handleCheckout:', error);
+        }
+    };
+    
+    const createOrder = async () => {
+        try {
+            // Create an order in Firebase
+            for (let item of cartItems) {
+                await addDoc(collection(db, 'orders'), {
+                    customerId: customerId,
+                    productId: item.productId,
+                    productName: item.productName,
+                    price: item.price,
+                    quantity: item.quantity,
+                    createdAt: new Date(),
+                });
+            }
+    
+            // Clear the cart after creating the order
+            await clearCart();
+        } catch (error) {
+            console.error("Error creating order:", error);
+        }
+    };
+    
+    const clearCart = async () => {
+        try {
+            const cartRef = collection(db, 'carts');
+            const q = query(cartRef, where('customerId', '==', customerId));
+            const querySnapshot = await getDocs(q);
+            querySnapshot.forEach(async (doc) => {
+                await deleteDoc(doc.ref);  // Delete each cart item
+            });
+    
+            setCartItems([]);  // Clear state
+            console.log("Cart cleared!");
+        } catch (error) {
+            console.error("Error clearing cart:", error);
         }
     };
     

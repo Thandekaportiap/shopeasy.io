@@ -1,8 +1,8 @@
 
 // In your server file (e.g., server.js)
-import express from 'express';
-import Stripe from 'stripe';
-import cors from 'cors';
+const express = require('express');
+const Stripe = require('stripe');
+const cors = require('cors');
 
 const stripe = new Stripe('sk_test_51QBwYZA9hsbb7bPkozoWMsztepZqXfX5AdK4VvuErx9jSWUer0ojxe5IelRakrJw6PRWO9NnsrsCiLSkBWbylJez00jOXPQH6d'); 
 
