@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { doc, getDoc, addDoc, collection } from "firebase/firestore";
 import { db } from '../components/Firebase';
 import { loadStripe } from '@stripe/stripe-js';
+
 
 const stripePromise = loadStripe('pk_test_51QBwYZA9hsbb7bPk3qURxjQEH9qKpNV9wWbVrvqwBdAE9bwscO3RjzcRcrw6RcfGwoClNsqvBCkz2dwxabzRvGCN00TAomN0jY'); // Replace with your Stripe publishable key
 
@@ -10,6 +11,7 @@ const ProductDetails = ({ customerId }) => {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
     const [quantity, setQuantity] = useState(1);
+    const navigate = useNavigate();
     
     useEffect(() => {
         const fetchProduct = async () => {
@@ -29,6 +31,11 @@ const ProductDetails = ({ customerId }) => {
     }, [id]);
 
     const addToCart = async () => {
+        if (!customerId) {
+            // If customerId is null, navigate to login with the return URL
+            navigate(`/login/customer?redirect=/products/${id}`);
+            return;
+        }
         try {
             await addDoc(collection(db, 'carts'), {
                 customerId: customerId,

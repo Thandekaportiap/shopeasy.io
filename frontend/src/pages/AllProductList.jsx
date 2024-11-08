@@ -3,11 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllProducts } from '../Features/Product/ProductSlice';
 import ProductCard from '../components/ProductCard1';
 import TypewriterEffect from '../components/TypeEffect';
+import { useNavigate } from 'react-router-dom';
 
 const AllProductsList = ({ customerId }) => {
     const dispatch = useDispatch();
     const { items: products, status, error } = useSelector((state) => state.products);
     const [favorites, setFavorites] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(fetchAllProducts());
@@ -17,6 +19,11 @@ const AllProductsList = ({ customerId }) => {
     if (status === 'failed') return <p>Error: {error}</p>;
 
     const onAddToFavorites = (favoriteItem) => {
+      if (!customerId) {
+        // If customerId is null, navigate to login with the return URL to the All Products page
+        navigate(`/login/customer?redirect=/all-products`);
+        return;
+    }
         // Check if the item is already in favorites
         const isAlreadyFavorited = favorites.some(
           (item) => item.productId === favoriteItem.productId && item.customerId === favoriteItem.customerId

@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { doc, getDoc, addDoc, collection } from "firebase/firestore";
 import { db } from '../components/Firebase';
+
 
 const ProductCard1 = ({ product, customerId, onAddToFavorites }) => {
   // State to track if the product is favorited
   const [isFavorited, setIsFavorited] = useState(false);
   const [quantity, setQuantity] = useState(1);
+  const navigate = useNavigate();
 
   // Handle favorite click
   const handleFavoriteClick = () => {
@@ -17,6 +19,11 @@ const ProductCard1 = ({ product, customerId, onAddToFavorites }) => {
     }
   };
   const addToCart = async () => {
+    if (!customerId) {
+      // If customerId is null, navigate to login with the return URL to the All Products page
+      navigate(`/login/customer?redirect=/all-products`);
+      return;
+  }
     try {
         await addDoc(collection(db, 'carts'), {
             customerId: customerId,
