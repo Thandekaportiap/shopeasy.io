@@ -1,36 +1,22 @@
-import React from 'react'
-// npm i sweetalert2import Image from "next/image";
 
-const NoPage = () => {
+import { Link } from 'react-router-dom'
+
+
+
+export default function NoPage() {
   return (
-    <div className="h-[100vh] bg-white items-center flex justify-center px-5 lg:px-0">
-    {/* <div className="w-[415px] text-center flex-col items-center justify-center mx-auto gap-[100px]">
-      <div className="mb-8 md:mb-[56px]">
-        <div className="max-w-[312px] w-full h-[160px] relative flex justify-center items-center mx-auto">
-          <Image src="/assets/components/404/404-green.png" fill alt="404" />
-        </div>
-      </div>
-      <div>
-        <h3 className="text-4xl md:text-[56px] leading-[64px] text-[#1A1C16]">
-          Page Not Found
-        </h3>
-      </div>
-      <div className="flex flex-col gap-6 mt-3">
-        <div className="text-center">
-          <p className="text-base leading-6 tracking-wider font-sans">
-            The page you are looking for might have been removed had its name
-            changed or is temporarily unavailable.
-          </p>
-        </div>
-        <div>
-          <button className="bg-[#8AC732] text-white font-sans max-w-[146px] w-full h-[48px] rounded-[100px] font-medium text-sm">
-            Home Page
-          </button>
-        </div>
-      </div>
-    </div> */}
+    <>
+    
+    <div className="text-center">
+    <h1 className="mb-4 text-6xl font-semibold text-red-500">404</h1>
+    <p className="mb-4 text-lg text-[white]">Oops! Looks like you're lost.</p>
+    <div className="animate-bounce">
+      <svg className="mx-auto h-16 w-16 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+      </svg>
+    </div>
+    <p className="mt-4 text-[white]">Let's get you back  <Link to={"/"}><button className='border border-[#67595e] hover:bg-[#67595e] hover:text-white bg-violet-200 py-2 px-5 text-[black] font-bold rounded-md'>Home</button></Link>.</p>
   </div>
+</>
   )
 }
-
-export default NoPage

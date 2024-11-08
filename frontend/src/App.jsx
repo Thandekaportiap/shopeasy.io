@@ -23,6 +23,7 @@ import AdminProfile from './pages/adminpages/adminProfile';
 import ManageOrders from './pages/adminpages/ManageOrders';
 import Success from './components/Success';
 import Cancel from './components/Cancel';
+import Privacy from './pages/Privacy';
 
 
 function App() {
@@ -81,6 +82,7 @@ function App() {
         <Route path="/cancel" element={<Cancel />} />
         <Route path="about" element={<AboutPage />} />
         <Route path="/contactus" element={<Contact />} />
+        <Route path="/privacy" element={<Privacy />} />
         <Route path="*" element={<NoPage />} />
       </Routes>
      </div>
