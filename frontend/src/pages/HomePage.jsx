@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'; 
-import { TiShoppingCart } from 'react-icons/ti';
+// import { TiShoppingCart } from 'react-icons/ti';
 
 const HomePage = () => {
   let image = require('../assets/images(1).png');
@@ -24,7 +24,7 @@ const HomePage = () => {
             <Link to={'/allproducts'}>
               <button type="button" className='bg-[#675953] text-[#eed6d3] text-lg lg:text-2xl font-semibold px-4 py-2 rounded-md mt-8 flex items-center'>
                 Shop Now
-                <TiShoppingCart className="ml-2 text-[#eed6d3]" size={20} />
+                {/* <TiShoppingCart className="ml-2 text-[#eed6d3]" size={20} /> */}
               </button>
             </Link>
           </div>

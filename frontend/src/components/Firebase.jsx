@@ -13,13 +13,13 @@ import {  doc, setDoc, getDoc, updateDoc, arrayUnion, arrayRemove } from 'fireba
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyD1fQPKgvqnshM7hyb1KaPrRmmE3BK4eZA",
-  authDomain: "shopeasy-b66fd.firebaseapp.com",
-  projectId: "shopeasy-b66fd",
-  storageBucket: "shopeasy-b66fd.firebasestorage.app",
-  messagingSenderId: "1012407518234",
-  appId: "1:1012407518234:web:7c2e74e4b6abc1120cfda3",
-  measurementId: "G-0LDDM3YWWN"
+  apiKey: "AIzaSyAIcTiNJtPnoy_d41cV-IErNAFQoA73qjw",
+  authDomain: "shop-easy-8946c.firebaseapp.com",
+  projectId: "shop-easy-8946c",
+  storageBucket: "shop-easy-8946c.firebasestorage.app",
+  messagingSenderId: "614892388038",
+  appId: "1:614892388038:web:730e91f9474d4053b021c7",
+  measurementId: "G-R9QD0JT2S6"
 };
 
 // Initialize Firebase
